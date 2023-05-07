@@ -6,7 +6,7 @@
 import Token from './Token.js';
 import Lexer from './Lexer.js';
 import Interval from './misc/Interval.js';
-import TokenStream from "./TokenStream.js";
+import TokenStream from './TokenStream.js';
 
 /**
  * This implementation of {@link TokenStream} loads tokens from a
@@ -108,7 +108,7 @@ export default class BufferedTokenStream extends TokenStream {
 			skipEofCheck = false;
 		}
 		if (!skipEofCheck && this.LA(1) === Token.EOF) {
-			throw "cannot consume EOF";
+			throw 'cannot consume EOF';
 		}
 		if (this.sync(this.index + 1)) {
 			this.index = this.adjustSeekIndex(this.index + 1);
@@ -288,7 +288,7 @@ export default class BufferedTokenStream extends TokenStream {
 		}
 		this.lazyInit();
 		if (tokenIndex < 0 || tokenIndex >= this.tokens.length) {
-			throw "" + tokenIndex + " not in 0.." + this.tokens.length - 1;
+			throw '' + tokenIndex + ' not in 0..' + this.tokens.length - 1;
 		}
 		const nextOnChannel = this.nextTokenOnChannel(tokenIndex + 1, Lexer.DEFAULT_TOKEN_CHANNEL);
 		const from_ = tokenIndex + 1;
@@ -309,7 +309,7 @@ export default class BufferedTokenStream extends TokenStream {
 		}
 		this.lazyInit();
 		if (tokenIndex < 0 || tokenIndex >= this.tokens.length) {
-			throw "" + tokenIndex + " not in 0.." + this.tokens.length - 1;
+			throw '' + tokenIndex + ' not in 0..' + this.tokens.length - 1;
 		}
 		const prevOnChannel = this.previousTokenOnChannel(tokenIndex - 1, Lexer.DEFAULT_TOKEN_CHANNEL);
 		if (prevOnChannel === tokenIndex - 1) {
@@ -359,12 +359,12 @@ export default class BufferedTokenStream extends TokenStream {
 			stop = stop.tokenIndex;
 		}
 		if (start === null || stop === null || start < 0 || stop < 0) {
-			return "";
+			return '';
 		}
 		if (stop >= this.tokens.length) {
 			stop = this.tokens.length - 1;
 		}
-		let s = "";
+		let s = '';
 		for (let i = start; i < stop + 1; i++) {
 			const t = this.tokens[i];
 			if (t.type === Token.EOF) {
@@ -383,7 +383,7 @@ export default class BufferedTokenStream extends TokenStream {
 	}
 }
 
-Object.defineProperty(BufferedTokenStream, "size", {
+Object.defineProperty(BufferedTokenStream, 'size', {
 	get: function() {
 		return this.tokens.length;
 	}

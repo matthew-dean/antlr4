@@ -3,8 +3,8 @@
  * can be found in the LICENSE.txt file in the project root.
  */
 
-import CharStream from "./CharStream.js";
-import FileStream from "./FileStream.js";
+import CharStream from './CharStream.js';
+import FileStream from './FileStream.js';
 
 /**
  * Utility functions to create InputStreams from various sources.

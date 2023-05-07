@@ -16,6 +16,27 @@ parserOptions:
   project: ['./tsconfig.json']
   ecmaVersion: 2022
 rules:
-  no-unused-vars: ["error", { vars: "all", args: "none" }]
-  no-prototype-builtins: ["off"]
-  no-fallthrough: ["error", { "commentPattern": "no-break" }]
+  no-unused-vars:
+    - error
+    - vars: all
+      args: none
+  no-prototype-builtins:
+    - off
+  no-fallthrough:
+    - error
+    - commentPattern: no-break
+  quotes:
+    - error
+    - single
+  object-curly-spacing:
+    - error
+    - always
+overrides:
+  - files:
+      - "*.ts"
+    extends:
+      - eslint:recommended
+      - plugin:@typescript-eslint/eslint-recommended
+    parser: "@typescript-eslint/parser"
+    plugins:
+      - "@typescript-eslint"
