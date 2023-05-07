@@ -45,7 +45,8 @@
     "build": "webpack",
     "test": "jasmine",
     "coverage": "c8 jasmine",
-    "lint": "eslint src/antlr4/"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "engines": {
     "node": ">=16"

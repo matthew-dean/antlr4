@@ -12,11 +12,21 @@ export default class Token {
 
 	constructor() {
 		this.source = null;
-		this.type = null; // token type of the token
+		/**
+		 * The token type of the token
+		 * @type {number | null}
+		 */
+		this.type = null;
+		/**
+		 * The parser ignores everything not on DEFAULT_CHANNEL
+		 * @type {number | null}
+		 */
 		this.channel = null; // The parser ignores everything not on DEFAULT_CHANNEL
 		this.start = null; // optional; return -1 if not implemented.
 		this.stop = null; // optional; return -1 if not implemented.
+		/** @type {number | null} */
 		this.tokenIndex = null; // from 0..n-1 of the token object in the input stream
+		/** @type {number | null} */
 		this.line = null; // line=1..n of the 1st character
 		this.column = null; // beginning of the line at which it occurs, 0..n-1
 		this._text = null; // text of the token.

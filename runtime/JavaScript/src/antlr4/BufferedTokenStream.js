@@ -21,15 +21,25 @@ import TokenStream from './TokenStream.js';
  * {@link CommonTokenStream}.</p>
  */
 export default class BufferedTokenStream extends TokenStream {
+
+	/**
+	 * @param {Lexer} tokenSource 
+	 */
 	constructor(tokenSource) {
 
 		super();
-		// The {@link TokenSource} from which tokens for this stream are fetched.
+		/**
+		 * The {@link TokenSource} from which tokens for this stream are fetched.
+		 * 
+		 * @type {Lexer}
+		 */ 
 		this.tokenSource = tokenSource;
 		/**
 		 * A collection of all tokens fetched from the token source. The list is
 		 * considered a complete view of the input once {@link //fetchedEOF} is set
 		 * to {@code true}.
+		 * 
+		 * @type {Array<Token>}
 		 */
 		this.tokens = [];
 
@@ -44,6 +54,8 @@ export default class BufferedTokenStream extends TokenStream {
 		 * not yet been fetched from the token source. For additional information,
 		 * see the documentation of {@link IntStream} for a description of
 		 * Initializing Methods.</p>
+		 * 
+		 * @type {number}
 		 */
 		this.index = -1;
 
@@ -62,6 +74,8 @@ export default class BufferedTokenStream extends TokenStream {
 		 * into
 		 * {@link //tokens} is trivial with this field.</li>
 		 * <ul>
+		 * 
+		 * @type {boolean}
 		 */
 		this.fetchedEOF = false;
 	}
@@ -70,6 +84,9 @@ export default class BufferedTokenStream extends TokenStream {
 		return 0;
 	}
 
+	/**
+	 * @param {*} marker 
+	 */
 	release(marker) {
 		// no resources to release
 	}
