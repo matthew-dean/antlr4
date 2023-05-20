@@ -20,6 +20,7 @@ declare class Parser extends Recognizer<Token> {
     matchedEOF: boolean;
     buildParseTrees: boolean;
     printer?: Printer;
+    syntaxErrorsCount: number;
 
     constructor(input: TokenStream);
     match(ttype: number): Token;
@@ -41,4 +42,5 @@ declare class Parser extends Recognizer<Token> {
     setTokenStream(input: TokenStream): void;
     notifyErrorListeners(msg: string, offendingToken: Token, err: RecognitionException | undefined): void;
     getCurrentToken(): Token;
+    
 }
