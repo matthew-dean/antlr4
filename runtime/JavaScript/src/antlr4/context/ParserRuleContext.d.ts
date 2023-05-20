@@ -4,7 +4,8 @@ import {RecognitionException} from "../error";
 import {Token} from "../Token";
 import {Parser} from "../Parser";
 
-export declare class ParserRuleContext extends RuleContext {
+export default ParserRuleContext;
+declare class ParserRuleContext extends RuleContext {
     start: Token;
     stop: Token | undefined;
     children: ParseTree[] | null;

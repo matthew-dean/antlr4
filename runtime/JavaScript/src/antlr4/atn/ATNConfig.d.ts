@@ -1,5 +1,6 @@
 import { ATNState } from "../state";
 
-export declare class ATNConfig {
+export default ATNConfig;
+declare class ATNConfig {
     state: ATNState;
 }

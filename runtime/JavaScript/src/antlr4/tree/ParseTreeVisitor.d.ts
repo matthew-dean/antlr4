@@ -3,7 +3,8 @@ import {ErrorNode} from "./ErrorNode";
 import {TerminalNode} from "./TerminalNode";
 import {ParseTree} from "./ParseTree";
 
-export declare class ParseTreeVisitor<Result> {
+export default ParseTreeVisitor;
+declare class ParseTreeVisitor<Result> {
 
     visit(tree: ParseTree): Result;
 

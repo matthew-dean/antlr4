@@ -1,3 +1,4 @@
 import {Tree} from "./Tree";
 
-export declare class SyntaxTree extends Tree {}
+export default SyntaxTree;
+declare class SyntaxTree extends Tree {}

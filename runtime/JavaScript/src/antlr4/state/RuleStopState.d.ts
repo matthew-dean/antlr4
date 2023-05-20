@@ -1,5 +1,6 @@
 import {ATNState} from "./index";
 
-export declare class RuleStopState extends ATNState {
+export default RuleStopState;
+declare class RuleStopState extends ATNState {
 
 }

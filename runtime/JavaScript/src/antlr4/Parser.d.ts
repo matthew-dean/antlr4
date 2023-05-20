@@ -7,7 +7,8 @@ import {Token} from "./Token";
 import {ParserRuleContext} from "./context";
 import {Printer} from "./utils";
 
-export declare class Parser extends Recognizer<Token> {
+export default Parser;
+declare class Parser extends Recognizer<Token> {
 
     static EOF: number;
 

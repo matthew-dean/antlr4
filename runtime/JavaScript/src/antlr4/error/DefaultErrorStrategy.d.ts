@@ -3,7 +3,8 @@ import {RecognitionException} from "./RecognitionException";
 import {Parser} from "../Parser";
 import {Token} from "../Token";
 
-export declare class DefaultErrorStrategy implements ErrorStrategy {
+export default DefaultErrorStrategy;
+declare class DefaultErrorStrategy implements ErrorStrategy {
     recover(recognizer: Parser, e: RecognitionException): void;
 
     recoverInline(recognizer: Parser): Token;

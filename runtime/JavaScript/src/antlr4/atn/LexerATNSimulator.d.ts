@@ -5,7 +5,8 @@ import {PredictionContextCache} from "./PredictionContextCache";
 import {DFA} from "../dfa";
 import {CharStream} from "../CharStream";
 
-export declare class LexerATNSimulator implements ATNSimulator {
+export default LexerATNSimulator;
+declare class LexerATNSimulator implements ATNSimulator {
 
     decisionToDFA: DFA[];
 

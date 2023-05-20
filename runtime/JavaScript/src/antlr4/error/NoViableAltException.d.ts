@@ -3,7 +3,8 @@ import {Recognizer} from "../Recognizer";
 import { Token } from "../Token";
 import {RecognitionException} from "./RecognitionException";
 
-export declare class NoViableAltException extends RecognitionException {
+export default NoViableAltException;
+declare class NoViableAltException extends RecognitionException {
 
     deadEndConfigs: ATNConfigSet;
 

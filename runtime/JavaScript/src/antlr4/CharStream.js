@@ -11,8 +11,10 @@ import Token from './Token.js';
  *
  * Otherwise, the input is treated as a series of 16-bit UTF-16 code
  * units.
+ * @typedef {import('./CharStream').CharStreamClass} CharStreamClass
+ * @extends {CharStreamClass}
  */
-export default class CharStream {
+export class CharStream {
     constructor(data, decodeToUnicodeCodePoints) {
         this.name = '<empty>';
         this.strdata = data;
@@ -70,7 +72,7 @@ export default class CharStream {
         return this.LA(offset);
     }
 
-// mark/release do nothing; we have entire buffer
+    // mark/release do nothing; we have entire buffer
     mark() {
         return -1;
     }
@@ -123,3 +125,4 @@ export default class CharStream {
         return this._size;
     }
 }
+export default CharStream;

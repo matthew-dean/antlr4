@@ -8,7 +8,8 @@ import {DFA} from "../dfa";
 import {PredictionMode} from "./PredictionMode";
 import {Token} from "../Token";
 
-export declare class ParserATNSimulator extends ATNSimulator {
+export default ParserATNSimulator;
+declare class ParserATNSimulator extends ATNSimulator {
 
     predictionMode: PredictionMode;
     decisionToDFA: DFA[];

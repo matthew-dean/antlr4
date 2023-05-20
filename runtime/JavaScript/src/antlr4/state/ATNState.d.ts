@@ -1,6 +1,7 @@
 import {ATN} from "../atn";
 
-export declare class ATNState {
+export default ATNState;
+declare class ATNState {
     atn: ATN;
     stateNumber: number;
 }

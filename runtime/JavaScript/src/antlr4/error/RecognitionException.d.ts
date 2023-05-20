@@ -12,7 +12,8 @@ export interface ExceptionParams {
 
 }
 
-export declare class RecognitionException extends Error {
+export default RecognitionException;
+declare class RecognitionException extends Error {
     ctx: RuleContext;
     offendingToken: Token | null;
     constructor(params: ExceptionParams);

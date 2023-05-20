@@ -31,6 +31,12 @@ rules:
   object-curly-spacing:
     - error
     - always
+  semi:
+    - error
+    - always
+  indent:
+    - error
+    - 4
 overrides:
   - files:
       - "*.ts"

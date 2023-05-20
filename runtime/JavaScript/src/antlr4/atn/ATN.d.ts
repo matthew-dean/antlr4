@@ -2,7 +2,8 @@ import {IntervalSet} from "../misc";
 import {RuleContext} from "../context";
 import {ATNState, DecisionState, RuleStartState, RuleStopState} from "../state";
 
-export declare class ATN {
+export default ATN;
+declare class ATN {
 
     static INVALID_ALT_NUMBER: number;
 

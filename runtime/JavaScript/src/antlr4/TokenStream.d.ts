@@ -1,7 +1,7 @@
-import {Interval} from "./misc";
-import {Token} from "./Token";
+import { Interval } from './misc';
+import { Token } from './Token';
 
-export declare class TokenStream {
+declare class TokenStream {
 
     index: number;
     size: number;
@@ -14,3 +14,5 @@ export declare class TokenStream {
     getHiddenTokensToRight(tokenIndex: number, channelIndex?: number): Token[];
     get(idx: number): Token;
 }
+
+export default TokenStream;

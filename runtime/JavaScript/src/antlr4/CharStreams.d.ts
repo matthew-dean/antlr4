@@ -1,5 +1,6 @@
 import CharStream from './CharStream';
 
+export default CharStreams;
 declare class CharStreams {
     static fromString(data: string, decodeToUnicodeCodePoints?: boolean): CharStream;
     static fromBuffer(buffer: Buffer, encoding?: string): CharStream;
@@ -7,5 +8,3 @@ declare class CharStreams {
     static fromPath(path: string, encoding: string, callback: (err: Error, stream: CharStream) => void): void;
     static fromPathSync(path: string, encoding: string): CharStream;
 }
-
-export default CharStreams

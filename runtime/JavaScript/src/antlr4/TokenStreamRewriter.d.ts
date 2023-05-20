@@ -5,7 +5,8 @@ import { Interval } from "./misc/Interval";
 type Rewrites = Array<RewriteOperation | undefined>;
 type Text = unknown;
 
-export declare class TokenStreamRewriter {
+export default TokenStreamRewriter;
+declare class TokenStreamRewriter {
     static DEFAULT_PROGRAM_NAME: string;
     constructor(tokens: CommonTokenStream);
     getTokenStream(): CommonTokenStream;
