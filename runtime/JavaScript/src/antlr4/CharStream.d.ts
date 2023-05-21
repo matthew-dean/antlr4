@@ -1,9 +1,7 @@
-export declare class CharStreamClass {
+import { Class } from 'type-fest';
+interface CharStream {
     index: number; // defined as property
     size: number;// defined as property
-
-    constructor(data: string);
-    constructor(data: string, decodeToUnicodeCodePoints: boolean);
 
     reset(): void;
     consume(): void;
@@ -15,6 +13,12 @@ export declare class CharStreamClass {
     getText(start: number, stop: number): string;
     toString(): string;
 }
+
+export type CharStreamClass = Class<CharStream, [data: string, decodeToUnicodeCodePoints?: boolean]>
+
+
+
+
 // export declare interface CharStream extends CharStreamClass {}
 
 

@@ -11,8 +11,7 @@ import Token from './Token.js';
  *
  * Otherwise, the input is treated as a series of 16-bit UTF-16 code
  * units.
- * @typedef {import('./CharStream').CharStreamClass} CharStreamClass
- * @extends {CharStreamClass}
+ * @type {import('./CharStream').CharStreamClass}
  */
 export class CharStream {
     constructor(data, decodeToUnicodeCodePoints) {
