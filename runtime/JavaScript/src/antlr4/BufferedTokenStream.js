@@ -23,60 +23,60 @@ import TokenStream from './TokenStream.js';
 export default class BufferedTokenStream extends TokenStream {
 
     /**
-		 * @param {Lexer} tokenSource 
-		 */
+     * @param {Lexer} tokenSource 
+     */
     constructor(tokenSource) {
 
         super();
         /**
-				 * The {@link TokenSource} from which tokens for this stream are fetched.
-				 * 
-				 * @type {Lexer}
-				 */ 
+         * The {@link TokenSource} from which tokens for this stream are fetched.
+         * 
+         * @type {Lexer}
+         */ 
         this.tokenSource = tokenSource;
         /**
-				 * A collection of all tokens fetched from the token source. The list is
-				 * considered a complete view of the input once {@link //fetchedEOF} is set
-				 * to {@code true}.
-				 * 
-				 * @type {Array<Token>}
-				 */
+         * A collection of all tokens fetched from the token source. The list is
+         * considered a complete view of the input once {@link //fetchedEOF} is set
+         * to {@code true}.
+         * 
+         * @type {Array<Token>}
+         */
         this.tokens = [];
 
         /**
-				 * The index into {@link //tokens} of the current token (next token to
-				 * {@link //consume}). {@link //tokens}{@code [}{@link //p}{@code ]} should
-				 * be
-				 * {@link //LT LT(1)}.
-				 *
-				 * <p>This field is set to -1 when the stream is first constructed or when
-				 * {@link //setTokenSource} is called, indicating that the first token has
-				 * not yet been fetched from the token source. For additional information,
-				 * see the documentation of {@link IntStream} for a description of
-				 * Initializing Methods.</p>
-				 * 
-				 * @type {number}
-				 */
+         * The index into {@link //tokens} of the current token (next token to
+         * {@link //consume}). {@link //tokens}{@code [}{@link //p}{@code ]} should
+         * be
+         * {@link //LT LT(1)}.
+         *
+         * <p>This field is set to -1 when the stream is first constructed or when
+         * {@link //setTokenSource} is called, indicating that the first token has
+         * not yet been fetched from the token source. For additional information,
+         * see the documentation of {@link IntStream} for a description of
+         * Initializing Methods.</p>
+         * 
+         * @type {number}
+         */
         this.index = -1;
 
         /**
-				 * Indicates whether the {@link Token//EOF} token has been fetched from
-				 * {@link //tokenSource} and added to {@link //tokens}. This field improves
-				 * performance for the following cases:
-				 *
-				 * <ul>
-				 * <li>{@link //consume}: The lookahead check in {@link //consume} to
-				 * prevent
-				 * consuming the EOF symbol is optimized by checking the values of
-				 * {@link //fetchedEOF} and {@link //p} instead of calling {@link
-				 * //LA}.</li>
-				 * <li>{@link //fetch}: The check to prevent adding multiple EOF symbols
-				 * into
-				 * {@link //tokens} is trivial with this field.</li>
-				 * <ul>
-				 * 
-				 * @type {boolean}
-				 */
+         * Indicates whether the {@link Token//EOF} token has been fetched from
+         * {@link //tokenSource} and added to {@link //tokens}. This field improves
+         * performance for the following cases:
+         *
+         * <ul>
+         * <li>{@link //consume}: The lookahead check in {@link //consume} to
+         * prevent
+         * consuming the EOF symbol is optimized by checking the values of
+         * {@link //fetchedEOF} and {@link //p} instead of calling {@link
+         * //LA}.</li>
+         * <li>{@link //fetch}: The check to prevent adding multiple EOF symbols
+         * into
+         * {@link //tokens} is trivial with this field.</li>
+         * <ul>
+         * 
+         * @type {boolean}
+         */
         this.fetchedEOF = false;
     }
 
@@ -95,6 +95,7 @@ export default class BufferedTokenStream extends TokenStream {
         this.seek(0);
     }
 
+    /** @param {number} index */
     seek(index) {
         this.lazyInit();
         this.index = this.adjustSeekIndex(index);
@@ -104,6 +105,7 @@ export default class BufferedTokenStream extends TokenStream {
         return this.tokens.length;
     }
 
+    /** @param {number} index */
     get(index) {
         this.lazyInit();
         return this.tokens[index];
@@ -133,12 +135,14 @@ export default class BufferedTokenStream extends TokenStream {
     }
 
     /**
-		 * Make sure index {@code i} in tokens has a token.
-		 *
-		 * @return {Boolean} {@code true} if a token is located at index {@code i}, otherwise
-		 * {@code false}.
-		 * @see //get(int i)
-		 */
+     * Make sure index {@code i} in tokens has a token.
+     *
+     * @return {Boolean} {@code true} if a token is located at index {@code i}, otherwise
+     * {@code false}.
+     * @see //get(int i)
+     * 
+     * @param {number} i
+     */
     sync(i) {
         const n = i - this.tokens.length + 1; // how many more elements we need?
         if (n > 0) {
@@ -149,10 +153,11 @@ export default class BufferedTokenStream extends TokenStream {
     }
 
     /**
-		 * Add {@code n} elements to buffer.
-		 *
-		 * @return {Number} The actual number of elements added to the buffer.
-		 */
+     * Add {@code n} elements to buffer.
+     *
+     * @param {number} n
+     * @return {number} The actual number of elements added to the buffer.
+     */
     fetch(n) {
         if (this.fetchedEOF) {
             return 0;
@@ -169,7 +174,9 @@ export default class BufferedTokenStream extends TokenStream {
         return n;
     }
 
-    // Get all tokens from start..stop inclusively///
+    /**
+     * Get all tokens from start..stop inclusively
+     */
     getTokens(start, stop, types) {
         if (types === undefined) {
             types = null;
@@ -194,10 +201,12 @@ export default class BufferedTokenStream extends TokenStream {
         return subset;
     }
 
+    /** @param {number} i */
     LA(i) {
         return this.LT(i).type;
     }
 
+    /** @param {number} k */
     LB(k) {
         if (this.index - k < 0) {
             return null;
@@ -205,6 +214,9 @@ export default class BufferedTokenStream extends TokenStream {
         return this.tokens[this.index - k];
     }
 
+    /**
+     * @param {number} k
+     */
     LT(k) {
         this.lazyInit();
         if (k === 0) {
@@ -251,7 +263,11 @@ export default class BufferedTokenStream extends TokenStream {
         this.index = this.adjustSeekIndex(0);
     }
 
-    // Reset this token stream by setting its token source.///
+    /**
+     * Reset this token stream by setting its token source.
+     * 
+     * @param {Lexer} tokenSource
+     */
     setTokenSource(tokenSource) {
         this.tokenSource = tokenSource;
         this.tokens = [];
@@ -263,6 +279,8 @@ export default class BufferedTokenStream extends TokenStream {
 	 * Given a starting index, return the index of the next token on channel.
 	 * Return i if tokens[i] is on channel. Return -1 if there are no tokens
 	 * on channel between i and EOF.
+     * @param {number} i
+     * @param {string} channel
 	 */
     nextTokenOnChannel(i, channel) {
         this.sync(i);

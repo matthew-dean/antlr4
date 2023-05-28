@@ -11,9 +11,12 @@ import Token from './Token.js';
  *
  * Otherwise, the input is treated as a series of 16-bit UTF-16 code
  * units.
- * @type {import('./CharStream').CharStreamClass}
  */
-export class CharStream {
+export default class CharStream {
+    /**
+     * @param {string} data
+     * @param {boolean} [decodeToUnicodeCodePoints]
+     */
     constructor(data, decodeToUnicodeCodePoints) {
         this.name = '<empty>';
         this.strdata = data;
@@ -23,7 +26,7 @@ export class CharStream {
         this.data = [];
         if (this.decodeToUnicodeCodePoints) {
             for (let i = 0; i < this.strdata.length; ) {
-                const codePoint = this.strdata.codePointAt(i);
+                const codePoint = /** @type {number} */ (this.strdata.codePointAt(i));
                 this.data.push(codePoint);
                 i += codePoint <= 0xFFFF ? 1 : 2;
             }
@@ -53,6 +56,7 @@ export class CharStream {
         this._index += 1;
     }
 
+    /** @param {number} offset */
     LA(offset) {
         if (offset === 0) {
             return 0; // undefined
@@ -67,6 +71,7 @@ export class CharStream {
         return this.data[pos];
     }
 
+    /** @param {number} offset */
     LT(offset) {
         return this.LA(offset);
     }
@@ -76,12 +81,14 @@ export class CharStream {
         return -1;
     }
 
+    /** @param {number} marker */
     release(marker) {
     }
 
     /**
      * consume() ahead until p==_index; can't just set p=_index as we must
      * update line and column. If we seek backwards, just set p
+     * @param {number} _index
      */
     seek(_index) {
         if (_index <= this._index) {
@@ -93,6 +100,11 @@ export class CharStream {
         this._index = Math.min(_index, this._size);
     }
 
+    /**
+     * 
+     * @param {number} start 
+     * @param {number} stop
+     */
     getText(start, stop) {
         if (stop >= this._size) {
             stop = this._size - 1;
@@ -124,4 +136,3 @@ export class CharStream {
         return this._size;
     }
 }
-export default CharStream;
